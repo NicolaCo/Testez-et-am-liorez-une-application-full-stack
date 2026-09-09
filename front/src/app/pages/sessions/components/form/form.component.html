@@ -10,7 +10,7 @@
       </div>
     </mat-card-title>
     <mat-card-content *ngIf="sessionForm">
-      <form class="mt2" fxLayout="column" [formGroup]="sessionForm" (ngSubmit)="submit()">
+      <form class="mt2" fxLayout="column" [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="" fxFlex>
           <mat-label>Name</mat-label>
           <input matInput formControlName="name">

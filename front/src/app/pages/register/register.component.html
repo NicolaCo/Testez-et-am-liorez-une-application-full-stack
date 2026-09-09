@@ -3,7 +3,7 @@
         <mat-card-header fxLayoutAlign="center center">
             <mat-card-title>Register</mat-card-title>
         </mat-card-header>
-        <form class="register-form" [formGroup]="form" (ngSubmit)="submit()">
+        <form class="register-form" [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-card-content fxLayout="column">
                 <mat-form-field fxFlex>
                     <input matInput placeholder="First name" formControlName="firstName">

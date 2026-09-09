@@ -3,6 +3,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { SessionService } from '../../../../core/service/session.service';
 import { TeacherService } from '../../../../core/service/teacher.service';
 import { Session } from '../../../../core/models/session.interface';
@@ -48,20 +50,22 @@ export class FormComponent implements OnInit {
     }
   }
 
-  public submit(): void {
+  public submit(): Observable<Session> {
     const session = this.sessionForm?.value as Session;
+    const request$ = this.onUpdate
+      ? this.sessionApiService.update(this.id!, session)
+      : this.sessionApiService.create(session);
 
-    if (!this.onUpdate) {
-      this.sessionApiService
-        .create(session)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe((_: Session) => this.exitPage('Session created !'));
-    } else {
-      this.sessionApiService
-        .update(this.id!, session)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe((_: Session) => this.exitPage('Session updated !'));
-    }
+    return request$.pipe(
+      takeUntilDestroyed(this.destroyRef),
+      tap(() => this.exitPage(this.onUpdate ? 'Session updated !' : 'Session created !')),
+    );
+  }
+
+  public onSubmit(): void {
+    this.submit().subscribe({
+      error: () => this.matSnackBar.open('Unable to save the session', 'Close', { duration: 3000 }),
+    });
   }
 
   private initForm(session?: Session): void {

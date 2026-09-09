@@ -2,6 +2,8 @@ import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { SessionInformation } from 'src/app/core/models/sessionInformation.interface';
 import { SessionService } from 'src/app/core/service/session.service';
 import { LoginRequest } from '../../core/models/loginRequest.interface';
@@ -42,14 +44,22 @@ export class LoginComponent {
     ]
   });
 
-  public submit(): void {
+  public submit(): Observable<SessionInformation> {
     const loginRequest = this.form.value as LoginRequest;
-    this.authService.login(loginRequest).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: (response: SessionInformation) => {
+    return this.authService.login(loginRequest).pipe(
+      takeUntilDestroyed(this.destroyRef),
+      tap((response: SessionInformation) => {
         this.sessionService.logIn(response);
         this.router.navigate(['/sessions']);
-      },
-      error: error => this.onError = true,
-    });
+      }),
+      catchError(() => {
+        this.onError = true;
+        return EMPTY;
+      }),
+    );
+  }
+
+  public onSubmit(): void {
+    this.submit().subscribe();
   }
 }

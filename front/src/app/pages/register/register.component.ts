@@ -2,8 +2,11 @@ import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { AuthService } from '../../core/service/auth.service';
 import { RegisterRequest } from '../../core/models/registerRequest.interface';
+import { MessageResponse } from '../../core/models/messageResponse.interface';
 import { MaterialModule } from "../../shared/material.module";
 import { CommonModule } from "@angular/common";
 @Component({
@@ -54,13 +57,20 @@ export class RegisterComponent {
   });
 
 
-  public submit(): void {
+  public submit(): Observable<MessageResponse> {
     const registerRequest = this.form.value as RegisterRequest;
-    this.authService.register(registerRequest).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-        next: (_: void) => this.router.navigate(['/login']),
-        error: _ => this.onError = true,
-      }
+    return this.authService.register(registerRequest).pipe(
+      takeUntilDestroyed(this.destroyRef),
+      tap(() => this.router.navigate(['/login'])),
+      catchError(() => {
+        this.onError = true;
+        return EMPTY;
+      }),
     );
+  }
+
+  public onSubmit(): void {
+    this.submit().subscribe();
   }
 
 }
