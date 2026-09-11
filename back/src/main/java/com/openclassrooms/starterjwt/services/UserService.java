@@ -5,6 +5,8 @@ import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -19,5 +21,17 @@ public class UserService {
 
     public User findById(Long id) {
         return this.userRepository.findById(id).orElseThrow(NotFoundException::new);
+    }
+
+    public boolean existsByEmail(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
+    public User save(User user) {
+        return this.userRepository.save(user);
     }
 }
