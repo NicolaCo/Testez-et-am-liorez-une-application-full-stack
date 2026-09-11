@@ -27,7 +27,8 @@ public class SessionService {
     }
 
     public void delete(Long id) {
-        this.sessionRepository.deleteById(id);
+        Session session = getById(id);
+        this.sessionRepository.deleteById(session.getId());
     }
 
     public List<Session> findAll() {
@@ -56,7 +57,6 @@ public class SessionService {
         }
 
         session.getUsers().add(user);
-
         this.sessionRepository.save(session);
     }
 
@@ -72,7 +72,6 @@ public class SessionService {
         }
 
         session.setUsers(session.getUsers().stream().filter(user -> !user.getId().equals(userId)).collect(Collectors.toList()));
-
         this.sessionRepository.save(session);
     }
 }
