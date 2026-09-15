@@ -32,7 +32,9 @@ yarn-error.log
 /.angular/cache
 .sass-cache/
 /connect.lock
-/coverage
+/unit
+/e2e
+/.nyc_output
 /libpeerconnection.log
 testem.log
 /typings
