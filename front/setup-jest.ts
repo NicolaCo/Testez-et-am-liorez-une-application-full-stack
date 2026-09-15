@@ -1,4 +1,9 @@
-import 'jest-preset-angular/setup-jest';
+import { getTestBed } from '@angular/core/testing';
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
+
+if (!getTestBed().platform) {
+  setupZoneTestEnv();
+}
 
 /* global mocks for jsdom */
 const mock = () => {
@@ -11,20 +16,24 @@ const mock = () => {
   };
 };
 
-Object.defineProperty(window, 'localStorage', { value: mock() });
-Object.defineProperty(window, 'sessionStorage', { value: mock() });
+Object.defineProperty(window, 'localStorage', { value: mock(), configurable: true });
+Object.defineProperty(window, 'sessionStorage', { value: mock(), configurable: true });
 Object.defineProperty(window, 'getComputedStyle', {
   value: () => ['-webkit-appearance'],
+  configurable: true,
 });
 
-Object.defineProperty(document.body.style, 'transform', {
-  value: () => {
-    return {
-      enumerable: true,
-      configurable: true,
-    };
-  },
-});
+if (!Object.getOwnPropertyDescriptor(document.body.style, 'transform')) {
+  Object.defineProperty(document.body.style, 'transform', {
+    value: () => {
+      return {
+        enumerable: true,
+        configurable: true,
+      };
+    },
+    configurable: true,
+  });
+}
 
 /* output shorter and more meaningful Zone error stack traces */
 // Error.stackTraceLimit = 2;
