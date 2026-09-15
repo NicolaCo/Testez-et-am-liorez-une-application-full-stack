@@ -29,6 +29,7 @@ describe('FormComponent', () => {
     await TestBed.configureTestingModule({
 
       imports: [
+        FormComponent,
         RouterTestingModule,
         HttpClientModule,
         MatCardModule,
@@ -43,8 +44,7 @@ describe('FormComponent', () => {
       providers: [
         { provide: SessionService, useValue: mockSessionService },
         SessionApiService
-      ],
-      declarations: [FormComponent]
+      ]
     })
       .compileComponents();
 

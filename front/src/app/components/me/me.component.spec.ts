@@ -21,8 +21,8 @@ describe('MeComponent', () => {
   }
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MeComponent],
       imports: [
+        MeComponent,
         MatSnackBarModule,
         HttpClientModule,
         MatCardModule,

@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterTestingModule } from '@angular/router/testing';
 import { expect } from '@jest/globals';
 import { SessionService } from 'src/app/core/service/session.service';
 
@@ -19,8 +20,7 @@ describe('ListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ListComponent],
-      imports: [HttpClientModule, MatCardModule, MatIconModule],
+      imports: [ListComponent, HttpClientModule, MatCardModule, MatIconModule, RouterTestingModule],
       providers: [{ provide: SessionService, useValue: mockSessionService }]
     })
       .compileComponents();
