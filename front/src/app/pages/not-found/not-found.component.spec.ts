@@ -21,4 +21,10 @@ describe('NotFoundComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display the page not found message', () => {
+    const heading = fixture.nativeElement.querySelector('h1');
+
+    expect(heading?.textContent).toContain('Page not found !');
+  });
 });
