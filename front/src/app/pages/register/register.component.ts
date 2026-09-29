@@ -34,24 +34,24 @@ export class RegisterComponent {
       '',
       [
         Validators.required,
-        Validators.min(3),
-        Validators.max(20)
+        Validators.minLength(3),
+        Validators.maxLength(20)
       ]
     ],
     lastName: [
       '',
       [
         Validators.required,
-        Validators.min(3),
-        Validators.max(20)
+        Validators.minLength(3),
+        Validators.maxLength(20)
       ]
     ],
     password: [
       '',
       [
         Validators.required,
-        Validators.min(3),
-        Validators.max(40)
+        Validators.minLength(3),
+        Validators.maxLength(40)
       ]
     ]
   });
