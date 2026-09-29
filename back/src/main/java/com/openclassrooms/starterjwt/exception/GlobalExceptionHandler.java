@@ -16,13 +16,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void handleNotFoundException(NotFoundException ex, HttpServletRequest request) {
-        log.error("Ressource non trouvée : {} {}", request.getMethod(), request.getRequestURI(), ex);
+        log.error("Resource not found: {} {}", request.getMethod(), request.getRequestURI(), ex);
     }
 
     @ExceptionHandler({BadRequestException.class, MethodArgumentTypeMismatchException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handleBadRequest(Exception ex, HttpServletRequest request) {
-        log.error("Requête invalide : {} {}", request.getMethod(), request.getRequestURI(), ex);
+        log.error("Invalid request: {} {}", request.getMethod(), request.getRequestURI(), ex);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -32,12 +32,12 @@ public class GlobalExceptionHandler {
                 .map(error -> error.getField() + " " + error.getDefaultMessage())
                 .reduce((first, second) -> first + "; " + second)
                 .orElse("Validation failed");
-        log.error("Validation échouée : {} {} - {}", request.getMethod(), request.getRequestURI(), message);
+        log.error("Validation failed: {} {} - {}", request.getMethod(), request.getRequestURI(), message);
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public void handleGenericException(Exception ex, HttpServletRequest request) {
-        log.error("Erreur inattendue : {} {}", request.getMethod(), request.getRequestURI(), ex);
+        log.error("Unexpected error: {} {}", request.getMethod(), request.getRequestURI(), ex);
     }
 }
