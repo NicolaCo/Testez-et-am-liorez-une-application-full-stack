@@ -44,3 +44,9 @@ testem.log
 Thumbs.db
 
 **/.DS_Store 
+
+
+# Tests report
+.nyc_output
+/coverage
+/e2e
