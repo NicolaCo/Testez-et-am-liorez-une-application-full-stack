@@ -1,0 +1,19 @@
+oc:
+  app:
+    jwtExpirationMs: 86400000
+    jwtSecret: ${TOKEN_SECRET}
+spring:
+  docker:
+    compose:
+      enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+logging:
+  level:
+    root: warn
+    com:
+      openclassrooms: info
+    org:
+      testcontainers: info
