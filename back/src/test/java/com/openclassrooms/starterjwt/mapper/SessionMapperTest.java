@@ -65,9 +65,20 @@ class SessionMapperTest {
         return TestFixtures.user(id, email);
     }
 
+    private SessionDto sessionDtoWithoutRelations() {
+        SessionDto dto = new SessionDto();
+        dto.setId(SESSION_ID);
+        dto.setName(SESSION_NAME);
+        dto.setDescription(SESSION_DESCRIPTION);
+        dto.setDate(date);
+        dto.setTeacher_id(null);
+        dto.setUsers(null);
+        return dto;
+    }
+
     @Test
     void toDto_mapsTeacherAndUserIds() {
-        Teacher teacher = Teacher.builder().id(TEACHER_ID).lastName("Meyer").firstName("Nora").build();
+        Teacher teacher = TestFixtures.teacher(TEACHER_ID, "Meyer", "Nora");;
         User user1 = user(USER_1_ID, "u1@test.com");
         User user2 = user(USER_2_ID, "u2@test.com");
         Session session = sessionWith(teacher, List.of(user1, user2));
@@ -94,7 +105,7 @@ class SessionMapperTest {
 
     @Test
     void toEntity_mapsTeacherAndUsersFromServices() {
-        Teacher teacher = Teacher.builder().id(TEACHER_ID).lastName("Meyer").firstName("Nora").build();
+        Teacher teacher = TestFixtures.teacher(TEACHER_ID, "Meyer", "Nora");;
         User user1 = user(USER_1_ID, "u1@test.com");
         User user2 = user(USER_2_ID, "u2@test.com");
 
@@ -165,5 +176,37 @@ class SessionMapperTest {
         Session session = sessionMapper.toEntity(dto);
 
         assertThat(session.getUsers()).containsOnlyNulls();
+    }
+
+    @Test
+    void toEntity_whenDtoNull_returnsNull() {
+        assertThat(sessionMapper.toEntity((SessionDto) null)).isNull();
+    }
+
+    @Test
+    void toDto_whenSessionNull_returnsNull() {
+        assertThat(sessionMapper.toDto((Session) null)).isNull();
+    }
+
+    @Test
+    void toEntityList_mapsEveryDto() {
+        List<Session> sessions = sessionMapper.toEntity(List.of(sessionDtoWithoutRelations(), sessionDtoWithoutRelations()));
+
+        assertThat(sessions).hasSize(2);
+        assertThat(sessions).extracting(Session::getName).containsExactly(SESSION_NAME, SESSION_NAME);
+        assertThat(sessions).allSatisfy(session -> {
+            assertThat(session.getTeacher()).isNull();
+            assertThat(session.getUsers()).isEmpty();
+        });
+    }
+
+    @Test
+    void toEntityList_whenListNull_returnsNull() {
+        assertThat(sessionMapper.toEntity((List<SessionDto>) null)).isNull();
+    }
+
+    @Test
+    void toDtoList_whenListNull_returnsNull() {
+        assertThat(sessionMapper.toDto((List<Session>) null)).isNull();
     }
 }
