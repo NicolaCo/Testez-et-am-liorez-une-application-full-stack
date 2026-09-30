@@ -16,7 +16,7 @@ Backend de l'application Yoga App !.
     -> Maven 3.9.3 (https://archive.apache.org/dist/maven/maven-3/3.9.3/binaries/) ou plus
 
 ## Démarrage du back
-Pour démarrer le back, il :
+Pour démarrer le back, il faut :
 - démarrer Docker-Desktop sur votre poste de travail local.
 - lancer une console, se placer à la racine du projet et exécuter la commande Maven :
 ```
@@ -133,3 +133,42 @@ Importez la collection Postman
 La documentation de Postman se trouve ici :
 
 https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman
+
+
+## Lancer les tests du back
+Lancer toute la suite de tests :
+```bash
+mvn clean test
+```
+Cette commande exécute les tests, génère le rapport de couverture JaCoCo et échoue si un paquet du projet est sous le seuil de 80 % de lignes couvertes.
+
+### Lancer uniquement les tests unitaires
+```bash
+mvn -Dtest='*Test' -Djacoco.skip=true test
+```
+Note :  
+`-Djacoco.skip=true` : sans les tests d'intégration, la couverture par paquet passe sous le seuil et le contrôle JaCoCo fait échouer le build.
+
+### Lancer uniquement les tests d'intégration
+Ces tests démarrent un conteneur MySQL via Testcontainers : Docker doit être lancé au préalable.
+```bash
+mvn -Dtest='*IT' -Djacoco.skip=true test
+```
+
+### Lancer une seule classe de test
+```bash
+mvn -Dtest=SessionMapperTest -Djacoco.skip=true test
+```
+
+### Consulter le rapport de couverture de test
+Le rapport HTML est généré automatiquement par `mvn clean test` :
+> back/target/site/jacoco/index.html
+
+Le détail des chiffres par paquet est disponible dans :
+> back/target/site/jacoco/jacoco.csv
+
+### Régénérer le rapport de couverture de test
+Pour régénérer le rapport à partir des données déjà collectées :
+```bash
+mvn jacoco:report
+```
