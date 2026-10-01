@@ -1,0 +1,277 @@
+<html><head><meta charset="utf-8"/><title>Unit Test Report</title><style type="text/css">:root {
+  --text-primary: #111;
+  --text-secondary: #4f4f4f;
+  --success: #006633;
+  --success-bright: #80ffbf;
+  --danger: #cc071e;
+  --danger-bright: #fbdfe0;
+  --warning: #995c00;
+  --warning-bright: #ffeea8;
+  --panel: #eee;
+  --border: #949494;
+  --disabled: #6b6b6b;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+}
+body {
+  padding: 2rem 1rem;
+}
+.jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+#metadata-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.additional-information-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/** SUMMARY */
+#summary {
+  color: var(--text-primary);
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 0.5rem;
+  background: var(--panel);
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: var(--success);
+  border-left: 0.4rem solid var(--success);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: var(--danger);
+  border-left: 0.4rem solid var(--danger);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-pending {
+  color: var(--warning);
+  border-left: 0.4rem solid var(--warning);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-empty {
+  color: var(--disabled);
+  border-left: 0.4rem solid var(--disabled);
+  margin-bottom: 0.15rem;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: var(--success-bright);
+  color: var(--success);
+}
+.test-result.failed {
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.test-result.pending {
+  background-color: var(--warning-bright);
+  color: var(--warning);
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed var(--danger);
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 1rem;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: var(--panel);
+  color: var(--text-secondary);
+  border: 0.15rem solid;
+  border-color: var(--panel);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info:hover {
+  border-color: var(--border);
+  cursor: pointer;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 1rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.85rem;
+}
+.suite-info .suite-time.warn {
+  background-color: var(--danger);
+  color: #fff;
+}
+.suite-info:before {
+  content: "\2303";
+  display: inline-block;
+  margin-right: 1rem;
+  transform: rotate(180deg) translateY(0.15rem);
+}
+.suite-container[open] .suite-info:before {
+  transform: rotate(0deg) translateY(0.15rem);
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--panel);
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><main class="jesthtml-content"><header><h1 id="title">Unit Test Report</h1></header><section id="metadata-container"><div id="timestamp">Started: 2026-10-01 15:10:20</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (16)</div><div class="summary-passed ">16 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (105)</div><div class="summary-passed ">105 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></section><details id="suite-1" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/pages/register/register.component.spec.ts</div><div class="suite-time warn">7.706s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">RegisterComponent</div><div class="test-title">should create</div><div class="test-status">passed</div><div class="test-duration">0.353s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">RegisterComponent &gt; form validation</div><div class="test-title">should be invalid when empty</div><div class="test-status">passed</div><div class="test-duration">0.143s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">RegisterComponent &gt; form validation</div><div class="test-title">should be invalid with an invalid email</div><div class="test-status">passed</div><div class="test-duration">0.155s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">RegisterComponent &gt; form validation</div><div class="test-title">should be invalid with a too short first name</div><div class="test-status">passed</div><div class="test-duration">0.116s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">RegisterComponent &gt; form validation</div><div class="test-title">should be invalid with a too long last name</div><div class="test-status">passed</div><div class="test-duration">0.149s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">RegisterComponent &gt; form validation</div><div class="test-title">should be valid with valid inputs</div><div class="test-status">passed</div><div class="test-duration">0.114s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">RegisterComponent &gt; submit()</div><div class="test-title">should call authService.register with the registration data</div><div class="test-status">passed</div><div class="test-duration">0.09s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">RegisterComponent &gt; submit()</div><div class="test-title">should navigate to /login on success</div><div class="test-status">passed</div><div class="test-duration">0.126s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">RegisterComponent &gt; submit()</div><div class="test-title">should set onError to true and not navigate on error</div><div class="test-status">passed</div><div class="test-duration">0.08s</div></div></div></div></details><details id="suite-2" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/pages/sessions/components/detail/detail.component.spec.ts</div><div class="suite-time warn">8.028s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent</div><div class="test-title">should create</div><div class="test-status">passed</div><div class="test-duration">0.334s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; constructor</div><div class="test-title">should read the session id from the route</div><div class="test-status">passed</div><div class="test-duration">0.088s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; constructor</div><div class="test-title">should set the user as admin and the user id from the session information</div><div class="test-status">passed</div><div class="test-duration">0.064s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; constructor</div><div class="test-title">should not set the user as admin when the session information says so</div><div class="test-status">passed</div><div class="test-duration">0.109s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; fetchSession via ngOnInit</div><div class="test-title">should load the session from the API</div><div class="test-status">passed</div><div class="test-duration">0.079s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; fetchSession via ngOnInit</div><div class="test-title">should load the teacher associated to the session</div><div class="test-status">passed</div><div class="test-duration">0.085s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; fetchSession via ngOnInit</div><div class="test-title">should mark the user as participant when registered to the session</div><div class="test-status">passed</div><div class="test-duration">0.051s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; fetchSession via ngOnInit</div><div class="test-title">should not mark the user as participant when not registered</div><div class="test-status">passed</div><div class="test-duration">0.067s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; back</div><div class="test-title">should call window.history.back</div><div class="test-status">passed</div><div class="test-duration">0.085s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; delete</div><div class="test-title">should call the API with the session id</div><div class="test-status">passed</div><div class="test-duration">0.06s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; delete</div><div class="test-title">should open a snackbar and navigate to the sessions list on success</div><div class="test-status">passed</div><div class="test-duration">0.053s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; onDelete</div><div class="test-title">should open a snackbar when the deletion fails</div><div class="test-status">passed</div><div class="test-duration">0.04s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; participate</div><div class="test-title">should call the API with the session id and the user id</div><div class="test-status">passed</div><div class="test-duration">0.057s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; participate</div><div class="test-title">should refresh the session after participating</div><div class="test-status">passed</div><div class="test-duration">0.058s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; onParticipate</div><div class="test-title">should open a snackbar when the participation fails</div><div class="test-status">passed</div><div class="test-duration">0.057s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; unParticipate</div><div class="test-title">should call the API with the session id and the user id</div><div class="test-status">passed</div><div class="test-duration">0.05s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; unParticipate</div><div class="test-title">should refresh the session after withdrawing</div><div class="test-status">passed</div><div class="test-duration">0.056s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; onUnParticipate</div><div class="test-title">should open a snackbar when the withdrawal fails</div><div class="test-status">passed</div><div class="test-duration">0.05s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; template</div><div class="test-title">should display the session details</div><div class="test-status">passed</div><div class="test-duration">0.058s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; template</div><div class="test-title">should show the delete button for an admin</div><div class="test-status">passed</div><div class="test-duration">0.038s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; template</div><div class="test-title">should show the participate button for a non-admin user</div><div class="test-status">passed</div><div class="test-duration">0.053s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">DetailComponent &gt; template</div><div class="test-title">should show the withdraw button for a participant</div><div class="test-status">passed</div><div class="test-duration">0.072s</div></div></div></div></details><details id="suite-3" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/pages/sessions/components/form/form.component.spec.ts</div><div class="suite-time warn">9.111s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent</div><div class="test-title">should create</div><div class="test-status">passed</div><div class="test-duration">0.485s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; teachers list</div><div class="test-title">should load the teachers on init</div><div class="test-status">passed</div><div class="test-duration">0.181s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; ngOnInit</div><div class="test-title">should initialise an empty form in create mode</div><div class="test-status">passed</div><div class="test-duration">0.187s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; ngOnInit</div><div class="test-title">should redirect to the sessions list when the user is not an admin</div><div class="test-status">passed</div><div class="test-duration">0.173s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; ngOnInit</div><div class="test-title">should initialise the form with the session data in update mode</div><div class="test-status">passed</div><div class="test-duration">0.151s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; submit</div><div class="test-title">should create the session with the form values</div><div class="test-status">passed</div><div class="test-duration">0.169s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; submit</div><div class="test-title">should open a snackbar and navigate after creating the session</div><div class="test-status">passed</div><div class="test-duration">0.131s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; submit</div><div class="test-title">should update the session with the form values</div><div class="test-status">passed</div><div class="test-duration">0.14s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; submit</div><div class="test-title">should open a snackbar and navigate after updating the session</div><div class="test-status">passed</div><div class="test-duration">0.192s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; onSubmit</div><div class="test-title">should open a snackbar when saving fails</div><div class="test-status">passed</div><div class="test-duration">0.14s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; template</div><div class="test-title">should display the create session title in create mode</div><div class="test-status">passed</div><div class="test-duration">0.173s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; template</div><div class="test-title">should display the update session title in update mode</div><div class="test-status">passed</div><div class="test-duration">0.168s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; template</div><div class="test-title">should display the teacher select</div><div class="test-status">passed</div><div class="test-duration">0.195s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; template</div><div class="test-title">should disable the save button while the form is invalid</div><div class="test-status">passed</div><div class="test-duration">0.119s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">FormComponent &gt; template</div><div class="test-title">should enable the save button when the form is valid</div><div class="test-status">passed</div><div class="test-duration">0.119s</div></div></div></div></details><details id="suite-4" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/pages/sessions/components/list/list.component.spec.ts</div><div class="suite-time">2.52s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">ListComponent</div><div class="test-title">should create</div><div class="test-status">passed</div><div class="test-duration">0.145s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">ListComponent &gt; sessions$</div><div class="test-title">should emit the sessions returned by the API</div><div class="test-status">passed</div><div class="test-duration">0.071s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">ListComponent &gt; user getter</div><div class="test-title">should return undefined when the user is not logged in</div><div class="test-status">passed</div><div class="test-duration">0.081s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">ListComponent &gt; user getter</div><div class="test-title">should return the session information when logged in</div><div class="test-status">passed</div><div class="test-duration">0.092s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">ListComponent &gt; template</div><div class="test-title">should display the sessions</div><div class="test-status">passed</div><div class="test-duration">0.063s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">ListComponent &gt; template</div><div class="test-title">should show the create button when the user is an admin</div><div class="test-status">passed</div><div class="test-duration">0.054s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">ListComponent &gt; template</div><div class="test-title">should hide the create button when the user is not an admin</div><div class="test-status">passed</div><div class="test-duration">0.061s</div></div></div></div></details><details id="suite-5" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/pages/login/login.component.spec.ts</div><div class="suite-time">2.962s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">LoginComponent</div><div class="test-title">should create</div><div class="test-status">passed</div><div class="test-duration">0.193s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">LoginComponent &gt; form validation</div><div class="test-title">should be invalid when empty</div><div class="test-status">passed</div><div class="test-duration">0.085s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">LoginComponent &gt; form validation</div><div class="test-title">should be invalid with an invalid email</div><div class="test-status">passed</div><div class="test-duration">0.079s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">LoginComponent &gt; form validation</div><div class="test-title">should be invalid with a too short password</div><div class="test-status">passed</div><div class="test-duration">0.096s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">LoginComponent &gt; form validation</div><div class="test-title">should be valid with valid credentials</div><div class="test-status">passed</div><div class="test-duration">0.08s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">LoginComponent &gt; submit()</div><div class="test-title">should call authService.login with the credentials</div><div class="test-status">passed</div><div class="test-duration">0.115s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">LoginComponent &gt; submit()</div><div class="test-title">should log the user in and navigate to /sessions on success</div><div class="test-status">passed</div><div class="test-duration">0.086s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">LoginComponent &gt; submit()</div><div class="test-title">should set onError to true and not navigate on error</div><div class="test-status">passed</div><div class="test-duration">0.088s</div></div></div></div></details><details id="suite-6" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/guards/unauth.guard.spec.ts</div><div class="suite-time">0.462s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">UnauthGuard</div><div class="test-title">should be created</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">UnauthGuard &gt; canActivate</div><div class="test-title">should deny access and redirect to rentals when logged in</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">UnauthGuard &gt; canActivate</div><div class="test-title">should allow access when not logged in</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-7" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/components/me/me.component.spec.ts</div><div class="suite-time">2.528s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">MeComponent</div><div class="test-title">should create</div><div class="test-status">passed</div><div class="test-duration">0.207s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">MeComponent &gt; ngOnInit()</div><div class="test-title">should load the current user</div><div class="test-status">passed</div><div class="test-duration">0.061s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">MeComponent &gt; delete()</div><div class="test-title">should delete the user, show a confirmation and log out on success</div><div class="test-status">passed</div><div class="test-duration">0.069s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">MeComponent &gt; onDelete()</div><div class="test-title">should show an error message when deletion fails</div><div class="test-status">passed</div><div class="test-duration">0.046s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">MeComponent &gt; back()</div><div class="test-title">should call window.history.back</div><div class="test-status">passed</div><div class="test-duration">0.041s</div></div></div></div></details><details id="suite-8" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/core/service/session-api.service.spec.ts</div><div class="suite-time">0.482s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionApiService</div><div class="test-title">should be created</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionApiService</div><div class="test-title">all() should call GET api/session</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionApiService</div><div class="test-title">detail() should call GET api/session/:id</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionApiService</div><div class="test-title">delete() should call DELETE api/session/:id</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionApiService</div><div class="test-title">create() should call POST api/session with the session</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionApiService</div><div class="test-title">update() should call PUT api/session/:id with the session</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionApiService</div><div class="test-title">participate() should call POST api/session/:id/participate/:userId</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionApiService</div><div class="test-title">unParticipate() should call DELETE api/session/:id/participate/:userId</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-9" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/guards/auth.guard.spec.ts</div><div class="suite-time">0.405s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">AuthGuard</div><div class="test-title">should be created</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">AuthGuard &gt; canActivate</div><div class="test-title">should deny access and redirect to login when not logged in</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">AuthGuard &gt; canActivate</div><div class="test-title">should allow access when logged in</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-10" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/interceptors/customJwtInterceptorFn.spec.ts</div><div class="suite-time">0.483s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">customJwtInterceptorFn</div><div class="test-title">should add the Authorization header when the user is logged in</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">customJwtInterceptorFn</div><div class="test-title">should leave the request unchanged when the user is not logged in</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div></div></details><details id="suite-11" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/core/service/session.service.spec.ts</div><div class="suite-time">0.449s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionService</div><div class="test-title">should be created</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionService &gt; initial state</div><div class="test-title">should be logged out by default</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionService &gt; initial state</div><div class="test-title">$isLogged() should emit false</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionService &gt; logIn()</div><div class="test-title">should set the session information and log the user in</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionService &gt; logIn()</div><div class="test-title">should emit true</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionService &gt; logOut()</div><div class="test-title">should clear the session information and log the user out</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">SessionService &gt; logOut()</div><div class="test-title">should emit false</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-12" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/pages/not-found/not-found.component.spec.ts</div><div class="suite-time">0.487s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">NotFoundComponent</div><div class="test-title">should create</div><div class="test-status">passed</div><div class="test-duration">0.06s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">NotFoundComponent</div><div class="test-title">should display the page not found message</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div></div></details><details id="suite-13" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/app.component.spec.ts</div><div class="suite-time">2.184s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">AppComponent</div><div class="test-title">should create the app</div><div class="test-status">passed</div><div class="test-duration">0.133s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">AppComponent &gt; $isLogged()</div><div class="test-title">should delegate to sessionService.$isLogged()</div><div class="test-status">passed</div><div class="test-duration">0.041s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">AppComponent &gt; logout()</div><div class="test-title">should log the user out and navigate to the home page</div><div class="test-status">passed</div><div class="test-duration">0.043s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">AppComponent &gt; template</div><div class="test-title">should show the login and register links when logged out</div><div class="test-status">passed</div><div class="test-duration">0.026s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">AppComponent &gt; template</div><div class="test-title">should show the logout link when logged in</div><div class="test-status">passed</div><div class="test-duration">0.03s</div></div></div></div></details><details id="suite-14" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/core/service/auth.service.spec.ts</div><div class="suite-time">0.434s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">AuthService</div><div class="test-title">should be created</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">AuthService</div><div class="test-title">register() should call POST /api/auth/register with the register request</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">AuthService</div><div class="test-title">login() should call POST /api/auth/login with the login request</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-15" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/core/service/user.service.spec.ts</div><div class="suite-time">0.396s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">UserService</div><div class="test-title">should be created</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">UserService</div><div class="test-title">getById() should call GET api/user/:id</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">UserService</div><div class="test-title">delete() should call DELETE api/user/:id</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-16" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/pruser/Dev/P4/Testez-et-am-liorez-une-application-full-stack/front/src/app/core/service/teacher.service.spec.ts</div><div class="suite-time">0.344s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">TeacherService</div><div class="test-title">should be created</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">TeacherService</div><div class="test-title">all() should call GET api/teacher</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">TeacherService</div><div class="test-title">detail() should call GET api/teacher/:id</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details></main></body></html>
