@@ -46,14 +46,6 @@ The coverage report is generated while the e2e tests run, no extra command is ne
 
 > front/coverage/lcov-report/index.html
 
-Regenerating the coverage report into `front/e2e/coverage` (you should launch e2e tests before):
-
-> npm run e2e:coverage
-
-Report is available here:
-
-> front/e2e/coverage/lcov-report/index.html
-
 #### Unitary test
 
 Launching test:

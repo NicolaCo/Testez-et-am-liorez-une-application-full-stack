@@ -33,7 +33,6 @@ yarn-error.log
 .sass-cache/
 /connect.lock
 /unit
-/e2e
 /.nyc_output
 /libpeerconnection.log
 testem.log
@@ -49,4 +48,3 @@ Thumbs.db
 # Tests report
 .nyc_output
 /coverage
-/e2e
